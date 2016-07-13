@@ -22,7 +22,7 @@ export default class FactoryGirl {
     this.assocBuildMany = deprecate('assocBuildMany', 'assocAttrsMany');
     this.assocAttrs = generatorThunk(this, AssocAttrs);
     this.assocAttrsMany = generatorThunk(this, AssocAttrsMany);
-    this.seq = this.sequence = generatorThunk(this, Sequence);
+    this.seq = this.sequence = generatorWithIdThunk(this, Sequence);
     this.chance = generatorThunk(this, ChanceGenerator);
     this.oneOf = generatorThunk(this, OneOf);
 
@@ -144,8 +144,31 @@ export function generatorThunk(factoryGirl, SomeGenerator) {
   return (...args) => () => generator.generate(...args);
 }
 
+export function generatorWithIdThunk(factoryGirl, SomeGenerator) {
+  const generator = new SomeGenerator(factoryGirl);
+  return (id, ...args) => {
+    if (typeof id !== 'string') {
+      id = generateId();
+    }
+    return () => generator.generate(id, ...args);
+  };
+}
+
 function deprecate(method, see) {
   return () => {
     throw new Error(`The ${method} method has been deprecated, use ${see} instead`);
   };
+}
+
+function generateId() {
+  let id;
+  try {
+    throw new Error;
+  } catch (e) {
+    const chunk = e.stack.split('\n')[3];
+    const p = chunk.indexOf('(');
+    id = chunk.substr(p);
+  }
+
+  return id;
 }

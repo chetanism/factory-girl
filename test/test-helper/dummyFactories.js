@@ -1,9 +1,5 @@
-
 import Factory from '../../src';
-// import _debug from 'debug';
-import { User, Address, PhoneNumber } from './dummyModels';
-
-// const debug = _debug('dummyFactories');
+import { User, Address, PhoneNumber, SequenceTest } from './dummyModels';
 
 Factory.define('PhoneNumber', PhoneNumber, {
   type: 'mobile',
@@ -39,3 +35,15 @@ Factory.define('User', User, {
   address: Factory.assocMany('Address', 3, 'id'),
   bio: Factory.chance('paragraph', { sentences: 2 }),
 });
+
+Factory.define('SequenceTest1', SequenceTest, {
+  seq1: Factory.sequence(),
+  seq2: Factory.sequence(),
+  seq3: Factory.sequence('SequenceTest1.seq3'),
+});
+
+Factory.define('SequenceTest2', SequenceTest, () => ({
+  seq1: Factory.sequence(),
+  seq2: Factory.sequence(),
+  seq3: Factory.sequence('SequenceTest2.seq3'),
+}));

@@ -11,8 +11,13 @@ export class PhoneNumber {
 
 }
 
+export class SequenceTest {
+
+}
+
 export default {
   User,
   Address,
   PhoneNumber,
+  SequenceTest,
 };

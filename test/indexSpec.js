@@ -1,4 +1,3 @@
-
 import { expect } from 'chai';
 import Factory from '../src';
 import ObjectAdapter from '../src/adapters/ObjectAdapter';
@@ -56,6 +55,55 @@ describe('index', function () {
       const attrs = await Factory.attrs('User');
       expect(attrs.bio).to.exist;
     }));
+  });
 
+  describe('sequences', function () {
+    it('works with sequences in object initialiser',
+      asyncFunction(async function () {
+        const seqTest1A = await Factory.build('SequenceTest1');
+        const seqTest1B = await Factory.build('SequenceTest1');
+
+        expect(seqTest1A.seq1).to.be.equal(1);
+        expect(seqTest1A.seq2).to.be.equal(1);
+        expect(seqTest1A.seq3).to.be.equal(1);
+
+        expect(seqTest1B.seq1).to.be.equal(2);
+        expect(seqTest1B.seq2).to.be.equal(2);
+        expect(seqTest1B.seq3).to.be.equal(2);
+
+        // As per current implementation
+        // expect(seqTest1A.seq1).to.be.equal(1);
+        // expect(seqTest1A.seq2).to.be.equal(2);
+        // expect(seqTest1A.seq3).to.be.equal(1);
+        //
+        // expect(seqTest1B.seq1).to.be.equal(3);
+        // expect(seqTest1B.seq2).to.be.equal(4);
+        // expect(seqTest1B.seq3).to.be.equal(2);
+      })
+    );
+
+    it('works with sequences in function initialiser',
+      asyncFunction(async function () {
+        const seqTest1A = await Factory.build('SequenceTest2');
+        const seqTest1B = await Factory.build('SequenceTest2');
+
+        expect(seqTest1A.seq1).to.be.equal(1);
+        expect(seqTest1A.seq2).to.be.equal(1);
+        expect(seqTest1A.seq3).to.be.equal(1);
+
+        expect(seqTest1B.seq1).to.be.equal(2);
+        expect(seqTest1B.seq2).to.be.equal(2);
+        expect(seqTest1B.seq3).to.be.equal(2);
+
+        // As per current implementation
+        // expect(seqTest1A.seq1).to.be.equal(1);
+        // expect(seqTest1A.seq2).to.be.equal(2);
+        // expect(seqTest1A.seq3).to.be.equal(1);
+        //
+        // expect(seqTest1B.seq1).to.be.equal(3);
+        // expect(seqTest1B.seq2).to.be.equal(4);
+        // expect(seqTest1B.seq3).to.be.equal(2);
+      })
+    );
   });
 });
