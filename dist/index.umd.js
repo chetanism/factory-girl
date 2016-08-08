@@ -1,35 +1,155 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('babel-runtime/helpers/slicedToArray'), require('babel-runtime/core-js/get-iterator'), require('babel-runtime/helpers/extends'), require('babel-runtime/core-js/promise'), require('babel-runtime/regenerator'), require('babel-runtime/helpers/asyncToGenerator'), require('babel-runtime/core-js/set'), require('babel-runtime/helpers/classCallCheck'), require('babel-runtime/helpers/createClass'), require('babel-runtime/helpers/typeof'), require('babel-runtime/core-js/object/keys'), require('babel-runtime/core-js/object/get-prototype-of'), require('babel-runtime/helpers/possibleConstructorReturn'), require('babel-runtime/helpers/inherits'), require('chance'), require('babel-runtime/core-js/object/assign')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'babel-runtime/helpers/slicedToArray', 'babel-runtime/core-js/get-iterator', 'babel-runtime/helpers/extends', 'babel-runtime/core-js/promise', 'babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'babel-runtime/core-js/set', 'babel-runtime/helpers/classCallCheck', 'babel-runtime/helpers/createClass', 'babel-runtime/helpers/typeof', 'babel-runtime/core-js/object/keys', 'babel-runtime/core-js/object/get-prototype-of', 'babel-runtime/helpers/possibleConstructorReturn', 'babel-runtime/helpers/inherits', 'chance', 'babel-runtime/core-js/object/assign'], factory) :
-  (factory((global.Factory = global.Factory || {}),global._slicedToArray,global._getIterator,global._extends,global._Promise,global._regeneratorRuntime,global._asyncToGenerator,global._Set,global._classCallCheck,global._createClass,global._typeof,global._Object$keys,global._Object$getPrototypeOf,global._possibleConstructorReturn,global._inherits,global.Chance,global._Object$assign));
-}(this, function (exports,_slicedToArray,_getIterator,_extends,_Promise,_regeneratorRuntime,_asyncToGenerator,_Set,_classCallCheck,_createClass,_typeof,_Object$keys,_Object$getPrototypeOf,_possibleConstructorReturn,_inherits,Chance,_Object$assign) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('chance')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'chance'], factory) :
+  (factory((global.FactoryGirl = global.FactoryGirl || {}),global.Chance));
+}(this, function (exports,Chance) { 'use strict';
 
-  _slicedToArray = 'default' in _slicedToArray ? _slicedToArray['default'] : _slicedToArray;
-  _getIterator = 'default' in _getIterator ? _getIterator['default'] : _getIterator;
-  _extends = 'default' in _extends ? _extends['default'] : _extends;
-  _Promise = 'default' in _Promise ? _Promise['default'] : _Promise;
-  _regeneratorRuntime = 'default' in _regeneratorRuntime ? _regeneratorRuntime['default'] : _regeneratorRuntime;
-  _asyncToGenerator = 'default' in _asyncToGenerator ? _asyncToGenerator['default'] : _asyncToGenerator;
-  _Set = 'default' in _Set ? _Set['default'] : _Set;
-  _classCallCheck = 'default' in _classCallCheck ? _classCallCheck['default'] : _classCallCheck;
-  _createClass = 'default' in _createClass ? _createClass['default'] : _createClass;
-  _typeof = 'default' in _typeof ? _typeof['default'] : _typeof;
-  _Object$keys = 'default' in _Object$keys ? _Object$keys['default'] : _Object$keys;
-  _Object$getPrototypeOf = 'default' in _Object$getPrototypeOf ? _Object$getPrototypeOf['default'] : _Object$getPrototypeOf;
-  _possibleConstructorReturn = 'default' in _possibleConstructorReturn ? _possibleConstructorReturn['default'] : _possibleConstructorReturn;
-  _inherits = 'default' in _inherits ? _inherits['default'] : _inherits;
   Chance = 'default' in Chance ? Chance['default'] : Chance;
-  _Object$assign = 'default' in _Object$assign ? _Object$assign['default'] : _Object$assign;
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+  };
+
+  var asyncToGenerator = function (fn) {
+    return function () {
+      var gen = fn.apply(this, arguments);
+      return new Promise(function (resolve, reject) {
+        function step(key, arg) {
+          try {
+            var info = gen[key](arg);
+            var value = info.value;
+          } catch (error) {
+            reject(error);
+            return;
+          }
+
+          if (info.done) {
+            resolve(value);
+          } else {
+            return Promise.resolve(value).then(function (value) {
+              return step("next", value);
+            }, function (err) {
+              return step("throw", err);
+            });
+          }
+        }
+
+        return step("next");
+      });
+    };
+  };
+
+  var classCallCheck = function (instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  };
+
+  var createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  var inherits = function (subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  };
+
+  var possibleConstructorReturn = function (self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  };
+
+  var slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
 
   function asyncPopulate(target, source) {
     if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) !== 'object') {
-      return _Promise.reject(new Error('Invalid target passed'));
+      return Promise.reject(new Error('Invalid target passed'));
     }
     if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) !== 'object') {
-      return _Promise.reject(new Error('Invalid source passed'));
+      return Promise.reject(new Error('Invalid source passed'));
     }
 
-    var promises = _Object$keys(source).map(function (attr) {
+    var promises = Object.keys(source).map(function (attr) {
       var promise = void 0;
       if (Array.isArray(source[attr])) {
         target[attr] = [];
@@ -38,25 +158,23 @@
         target[attr] = target[attr] || {};
         promise = asyncPopulate(target[attr], source[attr]);
       } else if (typeof source[attr] === 'function') {
-        promise = _Promise.resolve(source[attr]()).then(function (v) {
+        promise = Promise.resolve(source[attr]()).then(function (v) {
           target[attr] = v;
         });
       } else {
-        promise = _Promise.resolve(source[attr]).then(function (v) {
+        promise = Promise.resolve(source[attr]).then(function (v) {
           target[attr] = v;
         });
       }
       return promise;
     });
-    return _Promise.all(promises);
+    return Promise.all(promises);
   }
 
   var Factory = function () {
     function Factory(Model, initializer) {
       var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-
-      _classCallCheck(this, Factory);
-
+      classCallCheck(this, Factory);
       this.name = null;
       this.Model = null;
       this.initializer = null;
@@ -74,7 +192,7 @@
       this.options = _extends({}, this.options, options);
     }
 
-    _createClass(Factory, [{
+    createClass(Factory, [{
       key: 'getFactoryAttrs',
       value: function getFactoryAttrs() {
         var buildOptions = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -85,16 +203,16 @@
         } else {
           attrs = _extends({}, this.initializer);
         }
-        return _Promise.resolve(attrs);
+        return Promise.resolve(attrs);
       }
     }, {
       key: 'attrs',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee() {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee() {
           var extraAttrs = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
           var buildOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
           var factoryAttrs, modelAttrs;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -131,12 +249,12 @@
     }, {
       key: 'build',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee2(adapter) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee2(adapter) {
           var extraAttrs = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
           var buildOptions = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
           var buildCallbacks = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];
           var modelAttrs, model;
-          return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
@@ -165,13 +283,13 @@
     }, {
       key: 'create',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee3(adapter) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee3(adapter) {
           var _this = this;
 
           var attrs = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
           var buildOptions = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
           var model;
-          return _regeneratorRuntime.wrap(function _callee3$(_context3) {
+          return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
@@ -216,25 +334,25 @@
           buildOptionsArray = [];
         }
         if (typeof num !== 'number' || num < 1) {
-          return _Promise.reject(new Error('Invalid number of objects requested'));
+          return Promise.reject(new Error('Invalid number of objects requested'));
         }
         if (!Array.isArray(attrsArray)) {
-          return _Promise.reject(new Error('Invalid attrsArray passed'));
+          return Promise.reject(new Error('Invalid attrsArray passed'));
         }
         if (!Array.isArray(buildOptionsArray)) {
-          return _Promise.reject(new Error('Invalid buildOptionsArray passed'));
+          return Promise.reject(new Error('Invalid buildOptionsArray passed'));
         }
         attrsArray.length = buildOptionsArray.length = num;
         var models = [];
         for (var i = 0; i < num; i++) {
           models[i] = this.attrs(attrObject || attrsArray[i] || {}, buildOptionsObject || buildOptionsArray[i] || {});
         }
-        return _Promise.all(models);
+        return Promise.all(models);
       }
     }, {
       key: 'buildMany',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee4(adapter, num) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee4(adapter, num) {
           var attrsArray = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
 
           var _this2 = this;
@@ -242,7 +360,7 @@
           var buildOptionsArray = arguments.length <= 3 || arguments[3] === undefined ? [] : arguments[3];
           var buildCallbacks = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
           var attrs, models;
-          return _regeneratorRuntime.wrap(function _callee4$(_context4) {
+          return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
               switch (_context4.prev = _context4.next) {
                 case 0:
@@ -254,8 +372,8 @@
                   models = attrs.map(function (attr) {
                     return adapter.build(_this2.Model, attr);
                   });
-                  return _context4.abrupt('return', _Promise.all(models).then(function (builtModels) {
-                    return _this2.options.afterBuild && buildCallbacks ? _Promise.all(builtModels.map(function (builtModel) {
+                  return _context4.abrupt('return', Promise.all(models).then(function (builtModels) {
+                    return _this2.options.afterBuild && buildCallbacks ? Promise.all(builtModels.map(function (builtModel) {
                       return _this2.options.afterBuild(builtModel, attrsArray, buildOptionsArray);
                     })) : builtModels;
                   }));
@@ -277,13 +395,13 @@
     }, {
       key: 'createMany',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee5(adapter, num) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee5(adapter, num) {
           var _this3 = this;
 
           var attrsArray = arguments.length <= 2 || arguments[2] === undefined ? [] : arguments[2];
           var buildOptionsArray = arguments.length <= 3 || arguments[3] === undefined ? [] : arguments[3];
           var models, savedModels;
-          return _regeneratorRuntime.wrap(function _callee5$(_context5) {
+          return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
               switch (_context5.prev = _context5.next) {
                 case 0:
@@ -295,8 +413,8 @@
                   savedModels = models.map(function (model) {
                     return adapter.save(model, _this3.Model);
                   });
-                  return _context5.abrupt('return', _Promise.all(savedModels).then(function (createdModels) {
-                    return _this3.options.afterCreate ? _Promise.all(createdModels.map(function (createdModel) {
+                  return _context5.abrupt('return', Promise.all(savedModels).then(function (createdModels) {
+                    return _this3.options.afterCreate ? Promise.all(createdModels.map(function (createdModel) {
                       return _this3.options.afterCreate(createdModel, attrsArray, buildOptionsArray);
                     })) : createdModels;
                   }));
@@ -316,13 +434,12 @@
         return createMany;
       }()
     }]);
-
     return Factory;
   }();
 
   var Generator = function () {
     function Generator(factoryGirl) {
-      _classCallCheck(this, Generator);
+      classCallCheck(this, Generator);
 
       if (!factoryGirl) {
         throw new Error('No FactoryGirl instance provided');
@@ -330,7 +447,7 @@
       this.factoryGirl = factoryGirl;
     }
 
-    _createClass(Generator, [{
+    createClass(Generator, [{
       key: 'generate',
       value: function generate() {
         throw new Error('Override this method to generate a value');
@@ -341,20 +458,18 @@
         return this.factoryGirl.getAdapter(name).get(model, key);
       }
     }]);
-
     return Generator;
   }();
 
   var Sequence = function (_Generator) {
-    _inherits(Sequence, _Generator);
+    inherits(Sequence, _Generator);
 
     function Sequence() {
-      _classCallCheck(this, Sequence);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(Sequence).apply(this, arguments));
+      classCallCheck(this, Sequence);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(Sequence).apply(this, arguments));
     }
 
-    _createClass(Sequence, [{
+    createClass(Sequence, [{
       key: 'generate',
       value: function generate() {
         var id = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
@@ -370,7 +485,6 @@
         return callback ? callback(next) : next;
       }
     }]);
-
     return Sequence;
   }(Generator);
 
@@ -385,23 +499,22 @@
   }
 
   var Assoc = function (_Generator) {
-    _inherits(Assoc, _Generator);
+    inherits(Assoc, _Generator);
 
     function Assoc() {
-      _classCallCheck(this, Assoc);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(Assoc).apply(this, arguments));
+      classCallCheck(this, Assoc);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(Assoc).apply(this, arguments));
     }
 
-    _createClass(Assoc, [{
+    createClass(Assoc, [{
       key: 'generate',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(name) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(name) {
           var key = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
           var attrs = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
           var buildOptions = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
           var model;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -427,28 +540,26 @@
         return generate;
       }()
     }]);
-
     return Assoc;
   }(Generator);
 
   var AssocAttrs = function (_Generator) {
-    _inherits(AssocAttrs, _Generator);
+    inherits(AssocAttrs, _Generator);
 
     function AssocAttrs() {
-      _classCallCheck(this, AssocAttrs);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(AssocAttrs).apply(this, arguments));
+      classCallCheck(this, AssocAttrs);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(AssocAttrs).apply(this, arguments));
     }
 
-    _createClass(AssocAttrs, [{
+    createClass(AssocAttrs, [{
       key: 'generate',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(name) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(name) {
           var key = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
           var attrs = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
           var buildOptions = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
           var model;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -474,23 +585,21 @@
         return generate;
       }()
     }]);
-
     return AssocAttrs;
   }(Generator);
 
   var AssocMany = function (_Generator) {
-    _inherits(AssocMany, _Generator);
+    inherits(AssocMany, _Generator);
 
     function AssocMany() {
-      _classCallCheck(this, AssocMany);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(AssocMany).apply(this, arguments));
+      classCallCheck(this, AssocMany);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(AssocMany).apply(this, arguments));
     }
 
-    _createClass(AssocMany, [{
+    createClass(AssocMany, [{
       key: 'generate',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(name, num) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(name, num) {
           var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
           var _this2 = this;
@@ -498,7 +607,7 @@
           var attrs = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
           var buildOptions = arguments.length <= 4 || arguments[4] === undefined ? {} : arguments[4];
           var models;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -526,23 +635,21 @@
         return generate;
       }()
     }]);
-
     return AssocMany;
   }(Generator);
 
   var AssocAttrsMany = function (_Generator) {
-    _inherits(AssocAttrsMany, _Generator);
+    inherits(AssocAttrsMany, _Generator);
 
     function AssocAttrsMany() {
-      _classCallCheck(this, AssocAttrsMany);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(AssocAttrsMany).apply(this, arguments));
+      classCallCheck(this, AssocAttrsMany);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(AssocAttrsMany).apply(this, arguments));
     }
 
-    _createClass(AssocAttrsMany, [{
+    createClass(AssocAttrsMany, [{
       key: 'generate',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(name, num) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(name, num) {
           var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
           var _this2 = this;
@@ -550,7 +657,7 @@
           var attrs = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
           var buildOptions = arguments.length <= 4 || arguments[4] === undefined ? {} : arguments[4];
           var models;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -586,22 +693,20 @@
         return generate;
       }()
     }]);
-
     return AssocAttrsMany;
   }(Generator);
 
   var chance = new Chance();
 
   var ChanceGenerator = function (_Generator) {
-    _inherits(ChanceGenerator, _Generator);
+    inherits(ChanceGenerator, _Generator);
 
     function ChanceGenerator() {
-      _classCallCheck(this, ChanceGenerator);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(ChanceGenerator).apply(this, arguments));
+      classCallCheck(this, ChanceGenerator);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(ChanceGenerator).apply(this, arguments));
     }
 
-    _createClass(ChanceGenerator, [{
+    createClass(ChanceGenerator, [{
       key: 'generate',
       value: function generate(chanceMethod, options) {
         if (typeof chance[chanceMethod] !== 'function') {
@@ -610,25 +715,23 @@
         return chance[chanceMethod](options);
       }
     }]);
-
     return ChanceGenerator;
   }(Generator);
 
   var OneOf = function (_Generator) {
-    _inherits(OneOf, _Generator);
+    inherits(OneOf, _Generator);
 
     function OneOf() {
-      _classCallCheck(this, OneOf);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(OneOf).apply(this, arguments));
+      classCallCheck(this, OneOf);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(OneOf).apply(this, arguments));
     }
 
-    _createClass(OneOf, [{
+    createClass(OneOf, [{
       key: 'generate',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(possibleValues) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(possibleValues) {
           var size, randomIndex, value;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -668,7 +771,6 @@
         return generate;
       }()
     }]);
-
     return OneOf;
   }(Generator);
 
@@ -676,10 +778,10 @@
 
   var DefaultAdapter = function () {
     function DefaultAdapter() {
-      _classCallCheck(this, DefaultAdapter);
+      classCallCheck(this, DefaultAdapter);
     }
 
-    _createClass(DefaultAdapter, [{
+    createClass(DefaultAdapter, [{
       key: "build",
       value: function build(Model, props) {
         return new Model(props);
@@ -687,12 +789,12 @@
     }, {
       key: "save",
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(model, Model) {
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(model, Model) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  return _context.abrupt("return", _Promise.resolve(model.save()).then(function () {
+                  return _context.abrupt("return", Promise.resolve(model.save()).then(function () {
                     return model;
                   }));
 
@@ -713,12 +815,12 @@
     }, {
       key: "destroy",
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee2(model, Model) {
-          return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee2(model, Model) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
-                  return _context2.abrupt("return", _Promise.resolve(model.destroy()).then(function () {
+                  return _context2.abrupt("return", Promise.resolve(model.destroy()).then(function () {
                     return model;
                   }));
 
@@ -747,7 +849,6 @@
         return model.set(props);
       }
     }]);
-
     return DefaultAdapter;
   }();
 
@@ -756,13 +857,11 @@
       var _this = this;
 
       var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-      _classCallCheck(this, FactoryGirl);
-
+      classCallCheck(this, FactoryGirl);
       this.factories = {};
       this.options = {};
       this.adapters = {};
-      this.created = new _Set();
+      this.created = new Set();
 
       this.assoc = generatorThunk(this, Assoc);
       this.assocMany = generatorThunk(this, AssocMany);
@@ -780,7 +879,7 @@
       this.options = options;
     }
 
-    _createClass(FactoryGirl, [{
+    createClass(FactoryGirl, [{
       key: 'define',
       value: function define(name, Model, initializer, options) {
         if (this.getFactory(name, false)) {
@@ -791,8 +890,8 @@
     }, {
       key: 'attrs',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(name, _attrs, buildOptions) {
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(name, _attrs, buildOptions) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -815,13 +914,13 @@
     }, {
       key: 'build',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee2(name) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee2(name) {
           var _this2 = this;
 
           var attrs = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
           var buildOptions = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
           var adapter;
-          return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
@@ -847,11 +946,11 @@
     }, {
       key: 'create',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee3(name, attrs, buildOptions) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee3(name, attrs, buildOptions) {
           var _this3 = this;
 
           var adapter;
-          return _regeneratorRuntime.wrap(function _callee3$(_context3) {
+          return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
@@ -884,17 +983,17 @@
     }, {
       key: 'buildMany',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee4(name, num, attrs, buildOptions) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee4(name, num, attrs, buildOptions) {
           var _this4 = this;
 
           var adapter;
-          return _regeneratorRuntime.wrap(function _callee4$(_context4) {
+          return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
               switch (_context4.prev = _context4.next) {
                 case 0:
                   adapter = this.getAdapter(name);
                   return _context4.abrupt('return', this.getFactory(name).buildMany(adapter, num, attrs, buildOptions).then(function (models) {
-                    return _this4.options.afterBuild ? _Promise.all(models.map(function (model) {
+                    return _this4.options.afterBuild ? Promise.all(models.map(function (model) {
                       return _this4.options.afterBuild(model, attrs, buildOptions);
                     })) : models;
                   }));
@@ -916,11 +1015,11 @@
     }, {
       key: 'createMany',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee5(name, num, attrs, buildOptions) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee5(name, num, attrs, buildOptions) {
           var _this5 = this;
 
           var adapter;
-          return _regeneratorRuntime.wrap(function _callee5$(_context5) {
+          return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
               switch (_context5.prev = _context5.next) {
                 case 0:
@@ -928,7 +1027,7 @@
                   return _context5.abrupt('return', this.getFactory(name).createMany(adapter, num, attrs, buildOptions).then(function (models) {
                     return _this5.addToCreatedList(adapter, models);
                   }).then(function (models) {
-                    return _this5.options.afterCreate ? _Promise.all(models.map(function (model) {
+                    return _this5.options.afterCreate ? Promise.all(models.map(function (model) {
                       return _this5.options.afterCreate(model, attrs, buildOptions);
                     })) : models;
                   }));
@@ -980,7 +1079,7 @@
           var _iteratorError = undefined;
 
           try {
-            for (var _iterator = _getIterator(models), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            for (var _iterator = models[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
               var model = _step.value;
 
               this.created.add([adapter, model]);
@@ -1011,8 +1110,8 @@
         var _iteratorError2 = undefined;
 
         try {
-          for (var _iterator2 = _getIterator(this.created), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var _step2$value = _slicedToArray(_step2.value, 2);
+          for (var _iterator2 = this.created[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var _step2$value = slicedToArray(_step2.value, 2);
 
             var adapter = _step2$value[0];
             var model = _step2$value[1];
@@ -1035,7 +1134,7 @@
         }
 
         this.created.clear();
-        return _Promise.all(promises);
+        return Promise.all(promises);
       }
     }, {
       key: 'setAdapter',
@@ -1055,7 +1154,6 @@
         return adapter;
       }
     }]);
-
     return FactoryGirl;
   }();
 
@@ -1081,40 +1179,37 @@
   /* eslint-disable no-unused-vars */
 
   var BookshelfAdapter = function (_DefaultAdapter) {
-    _inherits(BookshelfAdapter, _DefaultAdapter);
+    inherits(BookshelfAdapter, _DefaultAdapter);
 
     function BookshelfAdapter() {
-      _classCallCheck(this, BookshelfAdapter);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(BookshelfAdapter).apply(this, arguments));
+      classCallCheck(this, BookshelfAdapter);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(BookshelfAdapter).apply(this, arguments));
     }
 
-    _createClass(BookshelfAdapter, [{
+    createClass(BookshelfAdapter, [{
       key: 'save',
       value: function save(doc, Model) {
         return doc.save(null, { method: 'insert' });
       }
     }]);
-
     return BookshelfAdapter;
   }(DefaultAdapter);
 
   /* eslint-disable no-unused-vars */
 
   var MongooseAdapter = function (_DefaultAdapter) {
-    _inherits(MongooseAdapter, _DefaultAdapter);
+    inherits(MongooseAdapter, _DefaultAdapter);
 
     function MongooseAdapter() {
-      _classCallCheck(this, MongooseAdapter);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(MongooseAdapter).apply(this, arguments));
+      classCallCheck(this, MongooseAdapter);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(MongooseAdapter).apply(this, arguments));
     }
 
-    _createClass(MongooseAdapter, [{
+    createClass(MongooseAdapter, [{
       key: 'destroy',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(model, Model) {
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(model, Model) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -1135,22 +1230,20 @@
         return destroy;
       }()
     }]);
-
     return MongooseAdapter;
   }(DefaultAdapter);
 
   /* eslint-disable no-unused-vars */
 
   var ObjectAdapter = function (_DefaultAdapter) {
-    _inherits(ObjectAdapter, _DefaultAdapter);
+    inherits(ObjectAdapter, _DefaultAdapter);
 
     function ObjectAdapter() {
-      _classCallCheck(this, ObjectAdapter);
-
-      return _possibleConstructorReturn(this, _Object$getPrototypeOf(ObjectAdapter).apply(this, arguments));
+      classCallCheck(this, ObjectAdapter);
+      return possibleConstructorReturn(this, Object.getPrototypeOf(ObjectAdapter).apply(this, arguments));
     }
 
-    _createClass(ObjectAdapter, [{
+    createClass(ObjectAdapter, [{
       key: 'build',
       value: function build(Model, props) {
         var model = new Model();
@@ -1160,8 +1253,8 @@
     }, {
       key: 'save',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(model, Model) {
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(model, Model) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -1184,8 +1277,8 @@
     }, {
       key: 'destroy',
       value: function () {
-        var ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee2(model, Model) {
-          return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+        var ref = asyncToGenerator(regeneratorRuntime.mark(function _callee2(model, Model) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
@@ -1213,10 +1306,9 @@
     }, {
       key: 'set',
       value: function set(props, model, Model) {
-        return _Object$assign(model, props);
+        return Object.assign(model, props);
       }
     }]);
-
     return ObjectAdapter;
   }(DefaultAdapter);
 
@@ -1227,6 +1319,7 @@
   exports.DefaultAdapter = DefaultAdapter;
   exports.MongooseAdapter = MongooseAdapter;
   exports.ObjectAdapter = ObjectAdapter;
+  exports.factory = factory;
   exports['default'] = factory;
 
   Object.defineProperty(exports, '__esModule', { value: true });
